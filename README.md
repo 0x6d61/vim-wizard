@@ -172,3 +172,7 @@ The effects tests also check timer cleanup, uninterrupted input, multi-kill
 counts, cancelled attacks, and unchanged map/register contents during animation.
 No external dependencies are required. Animation uses Vim popup windows or
 Neovim floating windows; text feedback still works without popup support.
+
+## License
+
+[MIT](LICENSE) © 2026 0x6d61.

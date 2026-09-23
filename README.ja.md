@@ -31,6 +31,8 @@ nvim -u NONE -n --cmd 'set runtimepath^=.' \
 
 既存のVimから起動する場合は、このディレクトリを `runtimepath` に追加し、`runtime plugin/yank_and_slash.vim` を実行してから `:VimWizard` を実行する。
 以前の `:YankAndSlash` も使える。
+ゲーム画面、上部の情報欄、店、説明画面で `:q` を入力すると、VimまたはNeovim全体を終了する。
+未保存の別ファイルがある場合は終了せず、その内容を保持する。
 
 ゲーム中に `?` を押すと、選択した言語で基本操作の一覧が開く。
 移動、削除、ヤンク、貼り付けと、`3w` や `2dd` の組み合わせ例を載せている。
@@ -180,10 +182,18 @@ vim -Nu NONE -i NONE -n -es -S tests/smoke.vim
 vim -Nu NONE -i NONE -n -es -S tests/effects.vim
 vim -Nu NONE -i NONE -n -es -S tests/teleport.vim
 vim -Nu NONE -i NONE -n -es -S tests/spawn.vim
+vim -Nu NONE -i NONE -n -es -S tests/shop.vim
+vim -Nu NONE -i NONE -n -es -S tests/quit_game.vim
+vim -Nu NONE -i NONE -n -es -S tests/quit_hud.vim
+vim -Nu NONE -i NONE -n -es -S tests/quit_modified.vim
 nvim --headless -u NONE -i NONE -n -S tests/smoke.vim
 nvim --headless -u NONE -i NONE -n -S tests/effects.vim
 nvim --headless -u NONE -i NONE -n -S tests/teleport.vim
 nvim --headless -u NONE -i NONE -n -S tests/spawn.vim
+nvim --headless -u NONE -i NONE -n -S tests/shop.vim
+nvim --headless -u NONE -i NONE -n -S tests/quit_game.vim
+nvim --headless -u NONE -i NONE -n -S tests/quit_hud.vim
+nvim --headless -u NONE -i NONE -n -S tests/quit_modified.vim
 ```
 
 言語選択、翻訳の切り替え、マップの到達性、敵の追跡、壁の迂回、建築、MPの消費と回復、巻き戻し、死亡、地下1000階への遷移を確認する。

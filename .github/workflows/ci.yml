@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: ${{ matrix.editor }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        editor: [vim, neovim]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install ${{ matrix.editor }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y "${{ matrix.editor }}"
+      - name: Run Vimscript tests
+        env:
+          TEST_EDITOR: ${{ matrix.editor }}
+        run: |
+          for test_file in tests/*.vim; do
+            echo "Running $test_file with $TEST_EDITOR"
+            if [ "$TEST_EDITOR" = vim ]; then
+              vim -Nu NONE -i NONE -n -es -S "$test_file"
+            else
+              nvim --headless -u NONE -i NONE -n -S "$test_file"
+            fi
+          done

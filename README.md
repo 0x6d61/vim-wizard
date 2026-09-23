@@ -163,6 +163,7 @@ vim -Nu NONE -i NONE -n -es -S tests/shop.vim
 vim -Nu NONE -i NONE -n -es -S tests/quit_game.vim
 vim -Nu NONE -i NONE -n -es -S tests/quit_hud.vim
 vim -Nu NONE -i NONE -n -es -S tests/quit_modified.vim
+vim -Nu NONE -i NONE -n -es -S tests/j_movement.vim
 nvim --headless -u NONE -i NONE -n -S tests/smoke.vim
 nvim --headless -u NONE -i NONE -n -S tests/effects.vim
 nvim --headless -u NONE -i NONE -n -S tests/teleport.vim
@@ -171,6 +172,7 @@ nvim --headless -u NONE -i NONE -n -S tests/shop.vim
 nvim --headless -u NONE -i NONE -n -S tests/quit_game.vim
 nvim --headless -u NONE -i NONE -n -S tests/quit_hud.vim
 nvim --headless -u NONE -i NONE -n -S tests/quit_modified.vim
+nvim --headless -u NONE -i NONE -n -S tests/j_movement.vim
 ```
 
 Tests cover title-screen language selection, Japanese/English messages,

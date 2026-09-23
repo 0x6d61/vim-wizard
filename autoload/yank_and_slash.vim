@@ -232,6 +232,8 @@ function! s:room() abort
   let b:ys.key = 0
   let b:ys.stock = {'hp': 1, 'mana': 1, 'scroll': 1}
   call cursor(1, 1)
+  " Reset the menu's remembered screen column before vertical motions.
+  normal! 0zt
   call s:show()
 endfunction
 

@@ -37,7 +37,9 @@ you choose a language. Japanese is selected initially; set
 The game has a separate read-only panel for HP, inventory, controls, and
 messages. Help and game messages use your selected language. `L` switches
 languages during play without spending a turn. `q` closes both game windows
-and returns to your previous tab.
+and returns to your previous tab. Entering `:q` from a game, HUD, shop, or
+help window quits Vim or Neovim entirely, subject to the usual unsaved-change
+check. If another buffer has unsaved changes, the editor stays open.
 
 `?` opens a scrollable shortcut guide in your selected language. It explains
 movement, cutting, copying, pasting, and combinations such as `3w` and `2dd`.
@@ -157,10 +159,18 @@ vim -Nu NONE -i NONE -n -es -S tests/smoke.vim
 vim -Nu NONE -i NONE -n -es -S tests/effects.vim
 vim -Nu NONE -i NONE -n -es -S tests/teleport.vim
 vim -Nu NONE -i NONE -n -es -S tests/spawn.vim
+vim -Nu NONE -i NONE -n -es -S tests/shop.vim
+vim -Nu NONE -i NONE -n -es -S tests/quit_game.vim
+vim -Nu NONE -i NONE -n -es -S tests/quit_hud.vim
+vim -Nu NONE -i NONE -n -es -S tests/quit_modified.vim
 nvim --headless -u NONE -i NONE -n -S tests/smoke.vim
 nvim --headless -u NONE -i NONE -n -S tests/effects.vim
 nvim --headless -u NONE -i NONE -n -S tests/teleport.vim
 nvim --headless -u NONE -i NONE -n -S tests/spawn.vim
+nvim --headless -u NONE -i NONE -n -S tests/shop.vim
+nvim --headless -u NONE -i NONE -n -S tests/quit_game.vim
+nvim --headless -u NONE -i NONE -n -S tests/quit_hud.vim
+nvim --headless -u NONE -i NONE -n -S tests/quit_modified.vim
 ```
 
 Tests cover title-screen language selection, Japanese/English messages,

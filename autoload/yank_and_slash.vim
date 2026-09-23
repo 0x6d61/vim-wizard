@@ -5,6 +5,10 @@ function! s:t(key, ...) abort
   return call('yank_and_slash#i18n#get', [b:ys_language, a:key] + a:000)
 endfunction
 
+function! yank_and_slash#quit_enter() abort
+  return getcmdtype() ==# ':' && getcmdline() ==# 'q' ? "\<C-U>qa\<CR>" : "\<CR>"
+endfunction
+
 function! s:new_state(hud) abort
   let seed = get(g:, 'vim_wizard_seed', float2nr(reltimefloat(reltime()) * 1000))
   return {'hp': 12, 'max_hp': 12, 'mana': 10, 'max_mana': 10,
@@ -126,6 +130,7 @@ function! yank_and_slash#start() abort
   nnoremap <silent><buffer> 2 :call yank_and_slash#language('en')<CR>
   nnoremap <silent><buffer> <CR> :call yank_and_slash#begin()<CR>
   nnoremap <silent><buffer> q :bwipeout!<CR>
+  cnoremap <buffer><expr> <CR> yank_and_slash#quit_enter()
   syntax match YSTitle /vim wizard\|\~ yank&slash \~/
   syntax match YSSelection /^  >.*/
   highlight default link YSTitle Title
@@ -174,6 +179,7 @@ function! yank_and_slash#begin() abort
   let hud = bufnr('%')
   let b:ys_game = game
   nnoremap <silent><buffer> q :call yank_and_slash#close(b:ys_game)<CR>
+  cnoremap <buffer><expr> <CR> yank_and_slash#quit_enter()
   wincmd p
   let b:ys = s:new_state(hud)
   augroup vim_wizard_effects
@@ -192,6 +198,7 @@ function! yank_and_slash#begin() abort
   nnoremap <silent><buffer> R :call yank_and_slash#restart()<CR>
   nnoremap <silent><buffer> L :call yank_and_slash#language()<CR>
   nnoremap <silent><buffer> q :call yank_and_slash#close(bufnr('%'))<CR>
+  cnoremap <buffer><expr> <CR> yank_and_slash#quit_enter()
   setlocal statusline=%!yank_and_slash#status()
   syntax match YSMonster /r/
   syntax match YSTreasure /[$k]/
@@ -566,6 +573,7 @@ function! yank_and_slash#shop() abort
   nnoremap <silent><buffer> 3 :call yank_and_slash#buy('scroll')<CR>
   nnoremap <silent><buffer> q :call yank_and_slash#shop_close()<CR>
   nnoremap <silent><buffer> <Esc> :call yank_and_slash#shop_close()<CR>
+  cnoremap <buffer><expr> <CR> yank_and_slash#quit_enter()
   syntax match YSTitle /^vim wizard.*/
   highlight default link YSTitle Title
   call s:shop_render()
@@ -628,4 +636,5 @@ function! yank_and_slash#help() abort
   nnoremap <silent><buffer> q :bwipeout!<CR>
   nnoremap <silent><buffer> <Esc> :bwipeout!<CR>
   nnoremap <silent><buffer> ? :bwipeout!<CR>
+  cnoremap <buffer><expr> <CR> yank_and_slash#quit_enter()
 endfunction
